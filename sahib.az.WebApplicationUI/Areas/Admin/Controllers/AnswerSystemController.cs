@@ -48,6 +48,7 @@ namespace sahib.az.WebApplicationUI.Areas.Admin.Controllers
                                        .Where(b => b.Brand.DeletedDate == null)
                                        .Where(t => t.Type.DeletedDate == null)
                                        .Where(p => p.DeletedDate == null)
+                                       .OrderBy(b => b.Brand.Name)
                                        .ToListAsync();
 
             ViewData["BrandId"] = new SelectList(_context.Brands.Where(b => b.DeletedDate == null), "Id", "Name");
@@ -98,7 +99,7 @@ namespace sahib.az.WebApplicationUI.Areas.Admin.Controllers
                 //}
             }
 
-            viewModel.Perfumes = await query.ToListAsync();
+            viewModel.Perfumes = await query.OrderBy(b => b.Brand.Name).ToListAsync();
 
             if (Request.IsAjaxRequest())
             {

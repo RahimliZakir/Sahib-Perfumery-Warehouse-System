@@ -9682,11 +9682,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\sahib.az (Back-End)\\sahib.az.Solution\\sahib.az.WebApplicationUI\\sahib.az.WebApplicationUI.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\Sahib\\sahib.az.WebApplicationUI\\sahib.az.WebApplicationUI.csproj",
       "projectName": "sahib.az.WebApplicationUI",
-      "projectPath": "C:\\Users\\User\\Desktop\\sahib.az (Back-End)\\sahib.az.Solution\\sahib.az.WebApplicationUI\\sahib.az.WebApplicationUI.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\Sahib\\sahib.az.WebApplicationUI\\sahib.az.WebApplicationUI.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\sahib.az (Back-End)\\sahib.az.Solution\\sahib.az.WebApplicationUI\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\Sahib\\sahib.az.WebApplicationUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -369,10 +369,10 @@
 
                             let copyTdd = document.querySelectorAll(".copy-tdd");
 
-                            $(copyTdd).click(CopyTddFunc);
+                            $(copyTdd).click(CopyTddFunc());
 
                             let productTd = $('.product-td');
-                            $(productTd).mouseover(ProductTdFunc);
+                            $(productTd).mouseover(ProductTdFunc());
                         },
                         error: function (msg) {
                             var errorMsg = msg;
