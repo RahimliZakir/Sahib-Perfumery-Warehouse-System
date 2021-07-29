@@ -1,0 +1,66 @@
+﻿@model SignInFormModel;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Giriş - SAHİB</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="Assets/Sources/CSS/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/3077fe3d43.js"></script>
+    <link rel="stylesheet" href="Assets/CSS/signin.min.css" />
+    <style>
+        input.input-validation-error,
+        textarea.input-validation-error,
+        select.input-validation-error {
+            border: 2px solid red !important;
+        }
+    </style>
+    <link rel="shortcut icon" href="uploads/logos/logo.png" type="image/x-icon">
+</head>
+<body>
+
+    <main>
+        <div class="container sign-in-container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 sol-sm-12 col-xs-12 sign-in-left">
+                    <div class="sign-in-left-img-div">
+                        <img src="uploads/logos/logo.png" alt="SAHIB">
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 sol-sm-12 col-xs-12 sign-in-right">
+                    <h1>GİRİŞ</h1>
+                    <form asp-action="SignIn" asp-controller="Account">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <h5 style="color: red;">@ViewBag.SignInFail</h5>
+                        <h6 style="color: red;">@ViewBag.Locked</h6>
+                        <input asp-for="Username" type="text" class="form-control" placeholder="İstifadəçi adı">
+
+                        <div class="password-div form-group">
+                            <i class="fas fa-eye password-eye"></i>
+                            <input asp-for="Password" id="password-input" type="password" class="form-control" placeholder="Şifrə">
+                        </div>
+
+                        <button type="submit">DAXİL OL</button>
+
+                        <!-- <div class="sign-in-right-pass-div">
+                            <a href="#">Şifrəni unutmusunuz?</a>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="Assets/Sources/JS/jquery.min.js"></script>
+    <script src="Assets/Sources/JS/bootstrap.bundle.min.js"></script>
+    <script src="libs/jquery-validate/jquery.validate.min.js"></script>
+    <script src="libs/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="Assets/JS/signin.js"></script>
+</body>
+</html>

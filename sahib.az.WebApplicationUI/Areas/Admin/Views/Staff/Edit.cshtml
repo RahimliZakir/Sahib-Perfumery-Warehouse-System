@@ -1,0 +1,179 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model StaffUserRoleViewModel;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>İşçilər - Yeniləmə - Admin</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="Assets/Sources/CSS/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/3077fe3d43.js"></script>
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+    <link rel="shortcut icon" href="uploads/logos/logo.png" type="image/x-icon">
+</head>
+<body>
+
+    <header id="add-admin-header">
+        <nav id="add-admin-nav">
+            <div class="container add-admin-nav-container">
+                <div class="row">
+                    <div class="col-6 add-admin-nav-left">
+                        <div class="img-div">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                <img src="uploads/logos/logo.png" alt="SAHIB">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 add-admin-nav-right">
+                        <ul class="d-flex" style="margin-right: 15px;">
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li style="margin-right: 10px;">
+                                    <a asp-action="Index" asp-controller="Brands">
+                                        Brend
+                                    </a>
+                                </li>
+                            }
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="AnswerSystem">
+                                    Cavablandırma sistemi
+                                </a>
+                            </li>
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-controller="Staff" style="color:yellow;">
+                                        İstifadəçilər
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <p>@ViewBag.Username</p>
+                        <a asp-action="SignOut" asp-controller="Account">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container pb-2" style="padding-top: 120px;">
+        <h1 class="text-center">İstifadəçi yeniləmə.</h1>
+        <hr />
+        <div class="row">
+            <div class="offset-3 col-6">
+                <form asp-action="Edit" asp-controller="Staff" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Name" class="control-label">Ad:</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Surname" class="control-label">Soyad: </label>
+                        <input asp-for="Surname" class="form-control" />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Patronymic" class="control-label">Ata adı: </label>
+                        <input asp-for="Patronymic" class="form-control" />
+                        <span asp-validation-for="Patronymic" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="BirthDate" class="control-label">Doğum tarixi: </label>
+                        <input asp-for="BirthDate" class="form-control" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="FinCode" class="control-label">Fin kod (ŞV): </label>
+                        <input asp-for="FinCode" class="form-control" />
+                        <span asp-validation-for="FinCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="SerialNumber" class="control-label">Seriya nömrəsi (ŞV): </label>
+                        <input asp-for="SerialNumber" class="form-control" />
+                        <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="PhoneNumber" class="control-label">Telefon nömrəsi (mobil): </label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="HomeNumber" class="control-label">Ev telefonu: </label>
+                        <input asp-for="HomeNumber" class="form-control" />
+                        <span asp-validation-for="HomeNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="RegistrationAddress" class="control-label">Qeydiyyat ünvanı: </label>
+                        <input asp-for="RegistrationAddress" class="form-control" />
+                        <span asp-validation-for="RegistrationAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="LivingAddress" class="control-label">Yaşayış ünvanı: </label>
+                        <input asp-for="LivingAddress" class="form-control" />
+                        <span asp-validation-for="LivingAddress" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="SecurityStamp" />
+                    <input type="hidden" asp-for="ConcurrencyStamp" />
+                    <input type="hidden" asp-for="PasswordHash" />
+                    <input type="hidden" asp-for="NormalizedEmail" />
+                    <input type="hidden" asp-for="NormalizedUserName" />
+                    <input type="hidden" asp-for="EmailConfirmed" />
+                    <input type="hidden" asp-for="PhoneNumberConfirmed" />
+                    <input type="hidden" asp-for="TwoFactorEnabled" />
+                    <input type="hidden" asp-for="LockoutEnd" />
+                    <input type="hidden" asp-for="LockoutEnabled" />
+                    <input type="hidden" asp-for="AccessFailedCount" />
+                    <div class="form-group mb-2">
+                        <label asp-for="UserName" class="control-label">İstifadəçi adı: </label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Email" class="control-label">Email: </label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <select class="form-select" asp-items="ViewBag.Roles" asp-for="Role.Id"></select>
+                    </div>
+                    @*<div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="EmailConfirmed" /> @Html.DisplayNameFor(model => model.EmailConfirmed)
+                            </label>
+                        </div>*@
+                    @*<div class="form-group">
+                            <label asp-for="PasswordHash" class="control-label"></label>
+                            <input asp-for="PasswordHash" class="form-control" />
+                            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                        </div>*@
+                    <div class="form-group">
+                        <input type="submit" value="Yenilə" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index" class="btn btn-danger">
+                <i class="fas fa-undo-alt"></i> Geriyə
+            </a>
+        </div>
+    </div>
+
+    <script src="Assets/Sources/JS/jquery.min.js"></script>
+    <script src="Assets/Sources/JS/bootstrap.bundle.min.js"></script>
+    <script src="libs/jquery-validate/jquery.validate.min.js"></script>
+    <script src="libs/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="Assets/JS/answer-system.js"></script>
+</body>
+</html>

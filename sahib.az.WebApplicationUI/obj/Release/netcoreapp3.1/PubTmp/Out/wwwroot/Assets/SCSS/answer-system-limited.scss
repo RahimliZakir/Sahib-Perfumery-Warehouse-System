@@ -1,0 +1,299 @@
+// Developed by Rahimli Zakir
+
+@import "./mainpartial";
+@import "./flexmixin";
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#add-admin-header {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    background-color: white;
+    width: 100%;
+
+    #add-admin-nav {
+        background-color: #021a3f;
+        padding: 2.5px;
+
+        .add-admin-nav-left {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            .img-div {
+                width: 20%;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+        .add-admin-nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            p {
+                margin-right: 15px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: white;
+            }
+
+            a {
+                display: inline-block;
+                color: white;
+            }
+        }
+    }
+
+    .header-container {
+        padding: 50px 0 33px 0;
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .header-left {
+                h3 {
+                    margin: 0;
+                }
+            }
+
+            .header-right {
+                text-align: right;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .header-right-left-div {
+                    input {
+                        border: 2px solid black;
+                    }
+
+                    input:focus {
+                        box-shadow: none !important;
+                        border: 2px solid teal;
+                    }
+
+                    input::placeholder {
+                        font-size: 0.8rem;
+                    }
+                }
+
+                .header-right-right-div {
+                    .add-admin-reload-btn {
+                        display: inline-block;
+                        cursor: pointer;
+                        padding: 5px 40px;
+                        border-radius: 5px;
+                        color: #021a3f;
+                        border: 2px solid #021a3f;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+main {
+    .main-container {
+        padding-top: 35px;
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            border-style: hidden;
+
+            thead {
+                tr {
+                    th {
+                        position: sticky;
+                        z-index: 666;
+                        top: 200px;
+                        border-style: none;
+                        font-size: 0.8rem;
+                        background-color: #ccbfd9;
+                        text-align: center;
+                    }
+
+                    th:first-child {
+                        border-radius: 10px 0 0 10px;
+                    }
+
+                    th:last-child {
+                        border-radius: 0 10px 10px 0;
+                    }
+                }
+            }
+
+            tbody {
+                border: 1px solid #ededed;
+
+                tr {
+                    td {
+                        position: relative;
+                        text-align: center;
+                        border: 1px solid #021a3f;
+                        font-size: 0.8rem;
+                    }
+
+                    td:first-of-type {
+                        min-width: 145px;
+                        max-width: 145px;
+                    }
+
+                    .product-td {
+                        min-width: 145px;
+                        max-width: 145px;
+
+                        .table-img-div-container {
+                            position: absolute;
+                            width: 100%;
+                            z-index: 9;
+                            background-color: white;
+                            top: -10px;
+                            left: 115%;
+                            right: 0;
+                            border: 1px solid black;
+                            padding: 2.5px;
+                            border-radius: 0 5px 5px 5px;
+                            .table-img-div {
+                                width: 100%;
+                                img {
+                                    width: 100%;
+                                    object-fit: cover;
+                                    height: 130px;
+                                }
+                            }
+                        }
+
+                        .table-img-container-hidden {
+                            visibility: hidden;
+                            opacity: 0;
+                            transition: 1s;
+                        }
+
+                        .table-img-container-visible {
+                            visibility: visible;
+                            opacity: 1;
+                            transition: 1s;
+                        }
+                    }
+
+                    .copy-td > a,
+                    .edit-td > a,
+                    .delete-td > a {
+                        color: #021a3f;
+                    }
+
+                    td:first-child {
+                        border-radius: 10px 0 0 10px;
+                    }
+
+                    td:last-child {
+                        border-radius: 0 10px 10px 0;
+                    }
+
+                    .three-month {
+                        background-color: #ecf1db;
+                    }
+                    .three-month-total {
+                        background-color: #d4e2c1;
+                    }
+
+                    .six-month {
+                        background-color: #faeada;
+                    }
+                    .six-month-total {
+                        background-color: #ffd4b2;
+                    }
+
+                    .nine-month {
+                        background-color: #dbeef4;
+                    }
+                    .nine-month-total {
+                        background-color: #badde0;
+                    }
+
+                    .twelve-month {
+                        background-color: #eeece0;
+                    }
+                    .twelve-month-total {
+                        background-color: #ddd8c6;
+                    }
+
+                    .fifteen-month {
+                        background-color: #f6dad5;
+                    }
+                    .fifteen-month-total {
+                        background-color: #e3b9ba;
+                    }
+
+                    .eighteen-month {
+                        background-color: #e3dfed;
+                    }
+                    .eighteen-month-total {
+                        background-color: #ccbfd9;
+                    }
+
+                    a {
+                        .fa-trash-alt {
+                            color: red;
+                        }
+                    }
+                }
+            }
+
+            tbody::before {
+                content: ".";
+                line-height: 8.5em;
+                color: white;
+                display: block;
+            }
+        }
+    }
+}
+
+@media (min-width: 1281px) {
+    .header-container {
+        padding: 50px 0 22px 0 !important;
+    }
+
+    .main-container {
+        tbody {
+            .product-td {
+                .table-img-div-container {
+                    position: absolute;
+                    width: 100%;
+                    z-index: 9;
+                    background-color: white;
+                    top: -10px;
+                    left: 115%;
+                    right: 0;
+                    border: 1px solid black;
+                    padding: 2.5px;
+                    border-radius: 0 5px 5px 5px;
+                    .table-img-div {
+                        width: 100%;
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                            height: 220px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

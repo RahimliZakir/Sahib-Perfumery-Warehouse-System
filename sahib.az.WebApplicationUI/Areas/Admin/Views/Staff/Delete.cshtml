@@ -1,0 +1,119 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model sahib.az.WebApplicationUI.Models.Entity.Membership.AppUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>İşçilər - Silmə - Admin</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="Assets/Sources/CSS/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/3077fe3d43.js"></script>
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+    <link rel="shortcut icon" href="uploads/logos/logo.png" type="image/x-icon">
+</head>
+<body>
+    <header id="add-admin-header">
+        <nav id="add-admin-nav">
+            <div class="container add-admin-nav-container">
+                <div class="row">
+                    <div class="col-6 add-admin-nav-left">
+                        <div class="img-div">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                <img src="uploads/logos/logo.png" alt="SAHIB">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 add-admin-nav-right">
+                        <ul class="d-flex" style="margin-right: 15px;">
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li style="margin-right: 10px;">
+                                    <a asp-action="Index" asp-controller="Brands">
+                                        Brend
+                                    </a>
+                                </li>
+                            }
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="AnswerSystem">
+                                    Cavablandırma sistemi
+                                </a>
+                            </li>
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-controller="Staff" style="color:yellow;">
+                                        İstifadəçilər
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <p>@ViewBag.Username</p>
+                        <a asp-action="SignOut" asp-controller="Account">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container" style="padding-top: 120px;">
+        <h3 class="text-center">Silmək istədiyinizə əminsinizmi?</h3>
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-6 text-end">
+                    Ad:
+                </dt>
+                <dd class="col-6">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-6 text-end">
+                    Soyad:
+                </dt>
+                <dd class="col-6">
+                    @Html.DisplayFor(model => model.Surname)
+                </dd>
+                <dt class="col-6 text-end">
+                    Ata ası:
+                </dt>
+                <dd class="col-6">
+                    @Html.DisplayFor(model => model.Patronymic)
+                </dd>
+                <dt class="col-6 text-end">
+                    İstifadəçi adı:
+                </dt>
+                <dd class="col-6">
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+                <dt class="col-6 text-end">
+                    Email:
+                </dt>
+                <dd class="col-6">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Sil" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-danger">
+                    <i class="fas fa-undo-alt"></i> Geriyə
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script src="Assets/Sources/JS/jquery.min.js"></script>
+    <script src="Assets/Sources/JS/bootstrap.bundle.min.js"></script>
+    <script src="libs/jquery-validate/jquery.validate.min.js"></script>
+    <script src="libs/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="Assets/JS/answer-system.js"></script>
+</body>
+</html>

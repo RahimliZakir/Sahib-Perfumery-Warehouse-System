@@ -1,0 +1,86 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model sahib.az.WebApplicationUI.Models.Entity.Brand
+
+@{
+    ViewData["Title"] = "Brend";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a  asp-action="Index" asp-controller="AnswerSystem">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="Brands" style="color:yellow;">
+                                    Brend
+                                </a>
+                            </li>
+                        }
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Staff">
+                                    İstifadəçilər
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <p>@ViewBag.Username</p>
+                    <a asp-action="SignOut" asp-controller="Account">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container" style="padding-top: 120px;">
+
+    <h1 class="text-center">Brend - Yeniləmə</h1>
+
+    <hr />
+
+    <div class="row">
+        <div class="offset-3 col-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Brendin adı: </label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <input type="submit" value="Yadda saxla" class="btn btn-warning" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" class="btn btn-danger">
+            <i class="fas fa-undo-alt"></i> Geriyə
+        </a>
+    </div>
+
+</div>

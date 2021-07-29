@@ -1,0 +1,165 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model sahib.az.WebApplicationUI.Models.Entity.Perfume
+
+@{
+    ViewData["Title"] = "Cavablandırma sistemi";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a asp-action="Index" asp-controller="AnswerSystem">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="Brands">
+                                    Brend
+                                </a>
+                            </li>
+                        }
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem" style="color:yellow;">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Staff">
+                                    İstifadəçilər
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <p>@ViewBag.Username</p>
+                    <a asp-action="SignOut" asp-controller="Account">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container" style="padding: 120px 0 20px 0;">
+
+    <h1 class="text-center">Cavablandırma sistemi -  Yeniləmə</h1>
+
+    <hr />
+
+    <div class="row">
+        <div class="offset-3 col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Parfüm: </label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="BrandId" class="control-label">Brend: </label>
+                    <select asp-for="BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>
+                    <span asp-validation-for="BrandId" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="ML" class="control-label">ML: </label>
+                    <input asp-for="ML" class="form-control" />
+                    <span asp-validation-for="ML" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="TypeId" class="control-label">Növ: </label>
+                    <select asp-for="TypeId" class="form-control" asp-items="ViewBag.TypeId"></select>
+                    <span asp-validation-for="TypeId" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check mt-2">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsTester" /> Tester?
+                    </label>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="Maya" class="control-label">Maya: </label>
+                    <input asp-for="Maya" class="form-control" />
+                    <span asp-validation-for="Maya" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="Price" class="control-label">Satışı: </label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="ThreeMonths" class="control-label">3 ay: </label>
+                    <input asp-for="ThreeMonths" class="form-control" />
+                    <span asp-validation-for="ThreeMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="SixMonths" class="control-label">6 ay: </label>
+                    <input asp-for="SixMonths" class="form-control" />
+                    <span asp-validation-for="SixMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="NineMonths" class="control-label">9 ay: </label>
+                    <input asp-for="NineMonths" class="form-control" />
+                    <span asp-validation-for="NineMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="TwelveMonths" class="control-label">12 ay: </label>
+                    <input asp-for="TwelveMonths" class="form-control" />
+                    <span asp-validation-for="TwelveMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="FifteenMonths" class="control-label">15 ay: </label>
+                    <input asp-for="FifteenMonths" class="form-control" />
+                    <span asp-validation-for="FifteenMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="EighteenMonths" class="control-label">18 ay: </label>
+                    <input asp-for="EighteenMonths" class="form-control" />
+                    <span asp-validation-for="EighteenMonths" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <input asp-for="ImagePath" class="form-control" />
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="CreatedDate" class="control-label">Əlavə olunma tarixi: </label>
+                    <input asp-for="CreatedDate" disabled class="form-control" />
+                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label asp-for="UpdatedDate" class="control-label">Yenilənmə tarixi: </label>
+                    <input asp-for="UpdatedDate" disabled class="form-control" />
+                    <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <input type="submit" value="Yenilə" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" class="btn btn-danger">
+            <i class="fas fa-undo-alt"></i> Geriyə
+        </a>
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="Assets/JS/answer-system.js"></script>
+}

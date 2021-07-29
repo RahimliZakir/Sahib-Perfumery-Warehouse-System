@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Layout = "SAHIB";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title | @ViewBag.Layout</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="Assets/Sources/CSS/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/3077fe3d43.js"></script>
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <header id="add-admin-header">
+        <nav id="add-admin-nav">
+            <div class="container add-admin-nav-container">
+                <div class="row">
+                    <div class="col-6 add-admin-nav-left">
+                        <div class="img-div">
+                            <a href="answer-system.html">
+                                <img src="Assets/Images/logo.png" alt="SAHIB">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 add-admin-nav-right">
+                        <p>worker</p>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container header-container">
+            <div class="row">
+                <div class="col-6 header-left">
+                    <h3>SAHIB Perfumery & Cosmetics</h3>
+                </div>
+                <div class="col-6 header-right">
+                    <div class="form-group header-right-left-div">
+                        <input type="text" placeholder="Axtarış mətnini daxil edin: " name="#" id="search-input"
+                               class="form-control">
+                    </div>
+                    <div class="header-right-right-div">
+                        <a class="add-admin-reload-btn">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script src="Assets/Sources/JS/jquery.min.js"></script>
+    <script src="Assets/Sources/JS/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

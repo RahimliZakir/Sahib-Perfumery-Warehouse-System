@@ -1,0 +1,120 @@
+﻿@model IEnumerable<sahib.az.WebApplicationUI.Models.Entity.Logo>
+
+@{
+    ViewData["Title"] = "Loqo";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+
+    <style>
+        #logo-add-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: rebeccapurple;
+            border-radius: 5px;
+            border: 1px solid white;
+        }
+
+        .img-div {
+            width: 25%;
+        }
+
+            .img-div > img {
+                width: 100%;
+                object-fit: cover;
+                height: 50px;
+            }
+    </style>
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a href="answer-system.html">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="Brands">
+                                Brend
+                            </a>
+                        </li>
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Logos" style="color:yellow;">
+                                Loqo
+                            </a>
+                        </li>
+                    </ul>
+                    <p>akhundzadeh</p>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container" style="padding-top: 120px;">
+
+    <h1 class="text-center">Loqolar - Ana səhifə</h1>
+
+    <p>
+        <a asp-action="Create" id="logo-add-btn">
+            <i class="fas fa-plus"></i>
+        </a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Şəkil (Loqo):
+                </th>
+                <th>
+                    Əlavə olunma tarixi:
+                </th>
+                <th>
+                    Yenilənmə tarixi:
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="img-div">
+                            <img src="uploads/logos/@item.ImagePath" />
+                        </div>
+                    </td>
+                    <td>
+                        @item.CreatedDate.ToString("dd.MM.yyyy HH:mm:ss")
+                    </td>
+                    <td>
+                        @item.UpdatedDate?.ToString("dd.MM.yyyy HH:mm:ss")
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

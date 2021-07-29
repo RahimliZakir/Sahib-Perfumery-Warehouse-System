@@ -1,0 +1,218 @@
+// Developed by Rahimli Zakir
+
+@import "./mainpartial";
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #ffffff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+body {
+    background-color: #021a3f;
+
+    main {
+        height: 100vh;
+
+        .sign-in-left {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            .sign-in-left-img-div {
+                width: 75%;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        .sign-in-left::after {
+            content: "";
+            position: absolute;
+            left: 100%;
+            display: inline-block;
+            background-color: white;
+            height: 80vh;
+            width: 1px;
+        }
+
+        .sign-in-right {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            h1 {
+                color: white;
+            }
+
+            form {
+                width: 75%;
+
+                input[type="text"] {
+                    border: 1px solid white;
+                    background-color: transparent;
+                    margin-top: 25px;
+                    font-size: 0.8rem;
+                    color: white;
+                    padding: 12.5px 4.5px;
+                }
+
+                input[type="text"]:focus {
+                    box-shadow: none;
+                }
+
+                input[type="text"]::placeholder {
+                    font-size: 0.8rem;
+                    letter-spacing: 1px;
+                    color: white;
+                }
+
+                .password-div {
+                    position: relative;
+
+                    .password-eye {
+                        display: inline-block;
+                        position: absolute;
+                        right: 10px;
+                        bottom: 15px;
+                        color: white;
+                        cursor: pointer;
+                    }
+
+                    #password-input {
+                        border: 1px solid white;
+                        background-color: transparent;
+                        margin-top: 25px;
+                        font-size: 0.8rem;
+                        color: white;
+                        padding: 12.5px 4.5px;
+                    }
+
+                    #password-input:focus {
+                        box-shadow: none;
+                    }
+
+                    #password-input::placeholder {
+                        font-size: 0.8rem;
+                        letter-spacing: 1px;
+                        color: white;
+                    }
+                }
+
+                button {
+                    display: inline-block;
+                    margin-top: 25px;
+                    width: 100%;
+                    border: none;
+                    border-radius: 5px;
+                    color: #021a3f;
+                    background-color: white;
+                    padding: 12.5px 0;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                }
+
+                .sign-in-right-pass-div {
+                    text-align: right;
+                    margin-top: 5px;
+                    a {
+                        display: inline-block;
+                        letter-spacing: 1px;
+                        font-size: 0.7rem;
+                        color: grey;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+
+        main {
+            height: auto;
+
+            .sign-in-left {
+                height: auto;
+            }
+
+            .sign-in-left::after {
+                display: none;
+            }
+
+            .sign-in-right {
+                height: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    body {
+        overflow-x: hidden;
+
+        main {
+            height: auto;
+
+            .sign-in-left {
+                height: auto;
+            }
+
+            .sign-in-left::after {
+                display: none;
+            }
+
+            .sign-in-right {
+                height: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    body {
+        overflow-x: hidden;
+
+        main {
+            .container {
+                padding: 0 !important;
+                margin: 0 !important;
+                .row {
+                    height: 100vh;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .sign-in-left {
+                        height: auto;
+                    }
+
+                    .sign-in-left::after {
+                        display: none;
+                    }
+
+                    .sign-in-right {
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,102 @@
+﻿@model AnswerIndexCreateViewModel;
+
+<div class="container add-perfume-container add-perfume-none">
+    <div class="add-perfume-div">
+        <a class="add-perfume-ext-btn">
+            <i class="fas fa-times"></i>
+        </a>
+        <form method="POST" asp-action="Create" asp-controller="AnswerSystem" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6 add-perfume-left-side">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label class="brend-label" asp-for="Perfume.BrandId" for="brend-select">Brend: </label>
+                        <select class="form-select" asp-for="Perfume.BrandId" id="brend-select" asp-items="ViewBag.BrandId">
+                            @*value*@
+                            <option selected disabled>---Brend Seçin---</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="ml-label" asp-for="Perfume.ML" for="ml-input">ML: </label>
+                        <input asp-for="Perfume.ML" class="form-control" type="number"
+                               id="ml-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="maya-label" asp-for="Perfume.Maya" for="maya-input">Maya: </label>
+                        <input asp-for="Perfume.Maya" class="form-control" type="number"
+                               id="maya-input">
+                    </div>
+                </div>
+                <div class="col-6 add-perfume-right-side">
+                    <div class="form-group">
+                        <label class="perfume-label" asp-for="Perfume.Name" for="perfume-input">Parfüm: </label>
+                        <input asp-for="Perfume.Name" class="form-control" type="text"
+                               id="perfume-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="nov-label" asp-for="Perfume.TypeId" for="nov-select">Növ: </label>
+                        <select asp-for="Perfume.TypeId" class="form-select" id="nov-select" asp-items="ViewBag.TypeId">
+                            @*value*@
+                            <option selected disabled>---Növ Seçin---</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="satisi-label" asp-for="Perfume.Price" for="satisi-input">Satışı: </label>
+                        <input asp-for="Perfume.Price" class="form-control" type="number"
+                               id="satisi-input">
+                    </div>
+                </div>
+                <h3 class="text-center input-header mt-3">Kredit</h3>
+                <div class="col-6 add-perfume-kredit-left-side">
+                    <div class="form-group mb-2 d-flex">
+                        <input class="form-control three-months-disabled-input" disabled
+                               value="3 ay" type="text">
+                        <input asp-for="Perfume.ThreeMonths" class="form-control" type="number">
+                    </div>
+                    <div class="form-group mb-2 d-flex">
+                        <input class="form-control six-months-disabled-input" disabled
+                               value="6 ay" type="text">
+                        <input asp-for="Perfume.SixMonths" class="form-control" type="number">
+                    </div>
+                    <div class="form-group mb-2 d-flex">
+                        <input class="form-control nine-months-disabled-input" disabled
+                               value="9 ay" type="text">
+                        <input asp-for="Perfume.NineMonths" class="form-control" type="number">
+                    </div>
+                </div>
+                <div class="col-6 add-perfume-kredit-right-side">
+                    <div class="form-group mb-2 d-flex">
+                        <input class="form-control twelve-months-disabled-input" disabled
+                               value="12 ay" type="text">
+                        <input asp-for="Perfume.TwelveMonths" class="form-control" type="number">
+                    </div>
+                    <div class="form-group mb-2 d-flex">
+                        <input class="form-control fifteen-months-disabled-input" disabled
+                               value="15 ay" type="text">
+                        <input asp-for="Perfume.FifteenMonths" class="form-control" type="number">
+                    </div>
+                    <div class="form-group mb-2 d-flex">
+                        <input class="form-control eighteen-months-disabled-input" disabled
+                               value="18 ay" type="text">
+                        <input asp-for="Perfume.EighteenMonths" class="form-control" type="number">
+                    </div>
+                </div>
+            </div>
+            <div class="add-perfume-checkbox-and-btn-div">
+                <div class="form-group">
+                    <input asp-for="Perfume.IsTester" class="form-check-input" type="checkbox" id="tester-checkbox">
+                    <label asp-for="Perfume.IsTester" class="tester-label form-check-label" for="tester-checkbox">
+                        Tester?
+                    </label>
+                </div>
+                <div class="form-group img-form-group">
+                    <label class="perfume-img-label" for="perfume-img-input">Şəkil: </label>
+                    <input class="form-control" name="file" type="file" id="perfume-img-input">
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    Əlavə et
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

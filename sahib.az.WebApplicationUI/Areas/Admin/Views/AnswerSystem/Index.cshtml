@@ -1,0 +1,423 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model AnswerIndexCreateViewModel;
+
+@{
+    ViewData["Title"] = "Cavablandırma sistemi";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+
+    <style>
+        .copy-tdd > a {
+            color: #021a3f;
+        }
+
+        .copy-textarea {
+            position: fixed;
+            z-index: -9999;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tippy-box[data-theme~='special'] {
+            background-color: #20bf6b;
+            color: white;
+        }
+
+            .tippy-box[data-theme~='special'][data-placement^='top'] > .tippy-arrow::before {
+                border-top-color: #20bf6b;
+            }
+
+            .tippy-box[data-theme~='special'][data-placement^='bottom'] > .tippy-arrow::before {
+                border-bottom-color: #20bf6b;
+            }
+
+            .tippy-box[data-theme~='special'][data-placement^='left'] > .tippy-arrow::before {
+                border-left-color: #20bf6b;
+            }
+
+            .tippy-box[data-theme~='special'][data-placement^='right'] > .tippy-arrow::before {
+                border-right-color: #20bf6b;
+            }
+    </style>
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a asp-action="Index" asp-controller="AnswerSystem">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="Brands">
+                                    Brend
+                                </a>
+                            </li>
+                        }
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem" style="color:yellow;">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Staff">
+                                    İstifadəçilər
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <p>@ViewBag.Username</p>
+                    <a asp-action="SignOut" asp-controller="Account">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container header-container">
+        <div class="row">
+            <div class="col-6 header-left">
+                <h3>SAHIB Perfumery & Cosmetics</h3>
+            </div>
+            <div class="col-6 header-right">
+                <div class="form-group header-right-left-div">
+                    <input type="text" autocomplete="off" placeholder="Axtarış mətnini daxil edin: " id="search-input" name="searchText"
+                           class="form-control">
+                </div>
+                <div class="header-right-right-div">
+
+                    <partial name="~/Areas/Admin/Views/Shared/Partials/_AnswerCreate.cshtml" model="@Model">
+
+                        <a class="add-admin-reload-btn">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="AddStaff" asp-controller="AnswerSystem" class="add-admin-add-worker-btn">
+                                <i class="fas fa-user-plus"></i>
+                            </a>
+
+                            <a class="add-admin-add-btn">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container-fluid main-container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Brend</th>
+                            <th>Parfüm</th>
+                            <th colspan="2">ML / Növ</th>
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <th>Maya</th>
+                            }
+                            <th>Satışı</th>
+                            <th colspan="2">3 ay</th>
+                            <th colspan="2">6 ay</th>
+                            <th colspan="2">9 ay</th>
+                            <th colspan="2">12 ay</th>
+                            <th colspan="2">15 ay</th>
+                            <th colspan="2">18 ay</th>
+                            <th></th>
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <th></th>
+                                <th></th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Perfume item in Model.Perfumes)
+                        {
+                            <tr>
+                                <td>@item.Brand.Name</td>
+                                <td class="product-td">
+                                    @(item.IsTester == true ? $"{item.Name} (T)" : item.Name)
+                                    <div class="table-img-div-container table-img-container-hidden">
+                                        <div class="table-img-div">
+                                            <img src="uploads/perfumes/@item.ImagePath" alt="SAHIB">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@item.ML</td>
+                                <td>@item.Type.Name</td>
+                                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+                                    <td>@item.Maya ₼</td>
+                                }
+                                <td>@item.Price ₼</td>
+                                <td class="three-month">@item.ThreeMonths ₼</td>
+                                <td class="three-month-total">@(item.ThreeMonths * 3) ₼</td>
+                                <td class="six-month">@item.SixMonths ₼</td>
+                                <td class="six-month-total">@(item.SixMonths * 6) ₼</td>
+                                <td class="nine-month">@item.NineMonths ₼</td>
+                                <td class="nine-month-total">@(item.NineMonths * 9) ₼</td>
+                                <td class="twelve-month">@item.TwelveMonths ₼</td>
+                                <td class="twelve-month-total">@(item.TwelveMonths * 12) ₼</td>
+                                <td class="fifteen-month">@item.FifteenMonths ₼</td>
+                                <td class="fifteen-month-total">@(item.FifteenMonths * 15) ₼</td>
+                                <td class="eighteen-month">@item.EighteenMonths ₼</td>
+                                <td class="eighteen-month-total">@(item.EighteenMonths * 18) ₼</td>
+                                <td class="copy-td" style="cursor: pointer;">
+                                    <textarea class="copy-textarea" aria-hidden="true">
+                                        @item.Description
+                                    </textarea>
+                                    <a class="copy-btn">
+                                        <i class="fas fa-clone"></i>
+                                    </a>
+                                </td>
+                                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+                                    <td class="edit-td">
+                                        <a asp-action="Edit" asp-controller="AnswerSystem" asp-route-id="@item.Id">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td class="delete-td">
+                                        <a asp-action="Delete" asp-controller="AnswerSystem" asp-route-id="@item.Id">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts{
+    <script src="Assets/JS/answer-system.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function CopyTddFunc() {
+                let copyTdd = document.querySelectorAll(".copy-tdd");
+
+                copyTdd.forEach(function (item, index,) {
+                    item.addEventListener('click', function (e) {
+                        e.stopPropagation();
+
+                        let copyArea = this.children[0];
+
+                        copyArea.select();
+
+                        document.execCommand("copy");
+
+                        let copyBtn = this.children[this.children.length - 1];
+
+                        copyBtn.style.color = "#44bd32";
+                        copyBtn.style.transition = "0.3s";
+
+                        setTimeout(function () {
+                            copyBtn.style.color = "black";
+                            copyBtn.style.transition = "0.3s";
+                        }, 1000)
+                    });
+                });
+
+                     tippy('.copy-tdd', {
+                         content: 'Copied!',
+                         trigger: 'click',
+                         theme: 'special',
+                         onShow(instance) {
+                             setTimeout(() => {
+                                 instance.hide();
+                             }, 1000);
+                         }
+                     });
+            }
+
+            function ProductTdFunc() {
+                let productTd = $('.product-td');
+
+                $(productTd).on('mouseenter', function () {
+                    let productTdImgContainer = $(this).find('.table-img-div-container');
+                    if ($(productTdImgContainer).hasClass('table-img-container-hidden')) {
+                        $(productTdImgContainer).removeClass('table-img-container-hidden');
+                        $(productTdImgContainer).addClass('table-img-container-visible');
+                    }
+                });
+
+                $(productTd).on('mouseleave', function () {
+                    let productTdImgContainer = $(this).find('.table-img-div-container');
+                    if ($(productTdImgContainer).hasClass('table-img-container-visible')) {
+                        $(productTdImgContainer).removeClass('table-img-container-visible');
+                        $(productTdImgContainer).addClass('table-img-container-hidden');
+                    }
+                });
+            }
+
+             let searchInput = $('#search-input');
+
+                let btns = $(".srch");
+
+            let pendingRequest;
+
+            $(searchInput).on('keyup', function (e) {
+                if ($(searchInput).val().length > 0) {
+                    let searchObj = $(e.currentTarget).map((index, item) => {
+                        let obj = {
+                            name: item.name,
+                            value: $(item).val()
+                        }
+
+                        return obj;
+                    }).toArray();
+
+                    let searchData = {};
+
+                    $.each(searchObj, function (index, item) {
+                        searchData[item.name] = item.value;
+                    });
+
+                    if (pendingRequest) {
+                        pendingRequest.abort();
+                        pendingRequest = null;
+                    }
+
+                    pendingRequest = $.ajax({
+                        url: '@Url.Action("Index")',
+                        type: 'POST',
+                        beforeSend: function (request) {
+                            request.setRequestHeader("RequestVerificationToken", $("[name='__RequestVerificationToken']").val());
+                        },
+                        data: searchData,
+                        success: function (successMsg) {
+                            $('tbody').html('');
+                            if (successMsg.perfumes != null || successMsg != null) {
+                                $.each(successMsg.perfumes, function (index, item) {
+                                    $('tbody').append(
+                                        `<tr>
+                                <td>${item.brand.name}</td>
+                                <td class="product-td">
+                                    ${item.isTester == true ? `${item.name} (T)` : item.name}
+                                    <div class="table-img-div-container table-img-container-hidden">
+                                        <div class="table-img-div">
+                                            <img src='/uploads/perfumes/${item.imagePath}'/>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>${item.ml}</td>
+                                <td>${item.type.name}</td>
+                                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+                                    <td>${item.maya} ₼</td>
+                                }
+                                <td>${item.price} ₼</td>
+                                <td class="three-month">${item.threeMonths} ₼</td>
+                                <td class="three-month-total">${item.threeMonths * 3} ₼</td>
+                                <td class="six-month">${item.sixMonths} ₼</td>
+                                <td class="six-month-total">${item.sixMonths * 6} ₼</td>
+                                <td class="nine-month">${item.nineMonths} ₼</td>
+                                <td class="nine-month-total">${item.nineMonths * 9} ₼</td>
+                                <td class="twelve-month">${item.twelveMonths} ₼</td>
+                                <td class="twelve-month-total">${item.twelveMonths * 12} ₼</td>
+                                <td class="fifteen-month">${item.fifteenMonths} ₼</td>
+                                <td class="fifteen-month-total">${item.fifteenMonths * 15} ₼</td>
+                                <td class="eighteen-month">${item.eighteenMonths} ₼</td>
+                                <td class="eighteen-month-total">${item.eighteenMonths * 18} ₼</td>
+                                <td class='copy-tdd' style='cursor: pointer;'>
+                                    <textarea class='copy-textarea' aria-hidden='true'>
+                                        ${item.description}
+                                    </textarea>
+                                    <a class='copy-btn'>
+                                        <i class="fas fa-clone"></i>
+                                    </a>
+                                </td>
+                                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                {
+                                <td class='edit-td'>
+                                    <a href='/answersystem/edit/${item.id}'>
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                                <td class='delete-td'>
+                                    <a href='/answersystem/delete/${item.id}'>
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                                }
+                           </tr>`);
+                                });
+                            }
+
+                            let copyTdd = document.querySelectorAll(".copy-tdd");
+
+                            $(copyTdd).click(CopyTddFunc);
+
+                            let productTd = $('.product-td');
+                            $(productTd).mouseover(ProductTdFunc);
+                        },
+                        error: function (msg) {
+                            var errorMsg = msg;
+                        }
+                    });
+                }
+                else if ($(searchInput).val().length < 1) {
+                    window.location.reload();
+                }
+                });
+            });
+
+            let copyTd = document.querySelectorAll('.copy-td');
+
+            copyTd.forEach(function (item, index,) {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+
+                    let copyArea = this.children[0];
+
+                    copyArea.select();
+
+                    document.execCommand("copy");
+
+                    let copyBtn = this.children[this.children.length - 1];
+
+                    copyBtn.style.color = "#44bd32";
+                    copyBtn.style.transition = "0.3s";
+
+                    setTimeout(function () {
+                        copyBtn.style.color = "black";
+                        copyBtn.style.transition = "0.3s";
+                    }, 1000)
+                });
+
+                tippy('.copy-td', {
+                    content: 'Copied!',
+                    trigger: 'click',
+                    theme: 'special',
+                    onShow(instance) {
+                        setTimeout(() => {
+                            instance.hide();
+                        }, 1000);
+                    }
+                });
+        });
+    </script>
+}

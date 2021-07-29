@@ -1,0 +1,99 @@
+﻿@model sahib.az.WebApplicationUI.Models.Entity.Logo
+
+@{
+    ViewData["Title"] = "Loqo";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+
+    <style>
+        .img-div {
+            width: 40%;
+        }
+
+            .img-div > img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+            }
+    </style>
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a href="answer-system.html">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="Brands">
+                                Brend
+                            </a>
+                        </li>
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Logos" style="color:yellow;">
+                                Loqo
+                            </a>
+                        </li>
+                    </ul>
+                    <p>akhundzadeh</p>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container" style="padding-top: 120px;">
+    <h3 class="text-center">Loqonu silmək istədiyinizə əminsinizmi?</h3>
+    <div>
+        <h1 class="text-center">Loqo - Silmə</h1>
+        <hr />
+        <dl class="row">
+            <dt class="col-6 text-end">
+                Şəkil (Loqo):
+            </dt>
+            <dd class="col-6">
+                <div class="img-div">
+                    <img src="uploads/logos/@Model.ImagePath" />
+                </div>
+            </dd>
+            <dt class="col-6 text-end">
+                Əlavə olunma tarixi:
+            </dt>
+            <dd class="col-6">
+                @Model.CreatedDate.ToString("dd.MM.yyyy HH:mm:ss")
+            </dd>
+            <dt class="col-6 text-end">
+                Yenilənmə tarixi:
+            </dt>
+            <dd class="col-6">
+                @Model.UpdatedDate?.ToString("dd.MM.yyyy HH:mm:ss")
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Sil" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-danger">
+                <i class="fas fa-undo-alt"></i> Geriyə
+            </a>
+        </form>
+    </div>
+
+</div>

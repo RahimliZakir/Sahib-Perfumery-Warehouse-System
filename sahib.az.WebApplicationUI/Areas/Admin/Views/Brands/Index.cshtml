@@ -1,0 +1,122 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model IEnumerable<sahib.az.WebApplicationUI.Models.Entity.Brand>
+
+@{
+    ViewData["Title"] = "Brend";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+
+    <style>
+        #brand-add-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: rebeccapurple;
+            border-radius: 5px;
+            border: 1px solid white;
+        }
+    </style>
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a asp-action="Index" asp-controller="AnswerSystem">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="Brands" style="color:yellow;">
+                                    Brend
+                                </a>
+                            </li>
+                        }
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Staff">
+                                    İstifadəçilər
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <p>@ViewBag.Username</p>
+                    <a asp-action="SignOut" asp-controller="Account">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<h1 class="text-center" style="padding-top: 120px;">Brendlər - Əsas səhifə</h1>
+
+<p>
+    <a asp-action="Create" id="brand-add-btn">
+        <i class="fas fa-plus"></i>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Brendin adı:
+            </th>
+            <th>
+                Əlavə olunma tarixi:
+            </th>
+            <th>
+                Yenilənmə tarixi:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <h5>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </h5>
+                </td>
+                <td>
+                    @item.CreatedDate.ToString("dd.MM.yyyy HH:mm:ss")
+                </td>
+                @if (item.UpdatedDate != null)
+                {
+                    <td>
+                        @item.UpdatedDate?.ToString("dd.MM.yyyy HH:mm:ss")
+                    </td>
+                }
+                else
+                {
+                    <td>
+                    </td>
+                }
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" style="padding: .375rem 15px;" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

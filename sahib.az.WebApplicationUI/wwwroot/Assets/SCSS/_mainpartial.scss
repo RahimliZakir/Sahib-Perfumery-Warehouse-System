@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "SamsungSharp-Medium";
+    src: url(../Fonts/SamsungSharpSans/samsungsharpsans-medium.otf);
+    font-style: normal;
+    font-weight: 400;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-family: "SamsungSharp-Medium", sans-serif;
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}

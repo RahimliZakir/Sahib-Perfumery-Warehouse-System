@@ -1,0 +1,94 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model sahib.az.WebApplicationUI.Models.Entity.Brand
+
+@{
+    ViewData["Title"] = "Brend";
+}
+
+@section css{
+    <link rel="stylesheet" href="Assets/CSS/answer-system.min.css" />
+}
+
+<header id="add-admin-header">
+    <nav id="add-admin-nav">
+        <div class="container add-admin-nav-container">
+            <div class="row">
+                <div class="col-6 add-admin-nav-left">
+                    <div class="img-div">
+                        <a asp-action="Index" asp-controller="AnswerSystem">
+                            <img src="uploads/logos/logo.png" alt="SAHIB">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 add-admin-nav-right">
+                    <ul class="d-flex" style="margin-right: 15px;">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li style="margin-right: 10px;">
+                                <a asp-action="Index" asp-controller="Brands" style="color:yellow;">
+                                    Brend
+                                </a>
+                            </li>
+                        }
+                        <li style="margin-right: 10px;">
+                            <a asp-action="Index" asp-controller="AnswerSystem">
+                                Cavablandırma sistemi
+                            </a>
+                        </li>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Staff">
+                                    İstifadəçilər
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <p>@ViewBag.Username</p>
+                    <a asp-action="SignOut" asp-controller="Account">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container" style="padding-top: 120px;">
+    <div>
+        <h1 class="text-center">Brend - Ətraflı</h1>
+        <hr />
+        <dl class="row">
+            <dt class="col-6 text-end">
+                Brendin adı:
+            </dt>
+            <dd class="col-6">
+                <h5>
+                    @Html.DisplayFor(model => model.Name)
+                </h5>
+            </dd>
+            <dt class="col-6 text-end">
+                Əlavə olunma tarixi:
+            </dt>
+            <dd class="col-6">
+                @Model.CreatedDate.ToString("dd.MM.yyyy HH:mm:ss")
+            </dd>
+            <dt class="col-6 text-end">
+                Yenilənmə tarixi:
+            </dt>
+            <dd class="col-6">
+                @Model.UpdatedDate?.ToString("dd.MM.yyyy HH:mm:ss")
+            </dd>
+        </dl>
+    </div>
+    <div class="text-center">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fas fa-pencil-alt"></i>
+        </a>
+        <a asp-action="Index" class="btn btn-danger">
+            <i class="fas fa-undo-alt"></i> Geriyə
+        </a>
+    </div>
+</div>
+
+

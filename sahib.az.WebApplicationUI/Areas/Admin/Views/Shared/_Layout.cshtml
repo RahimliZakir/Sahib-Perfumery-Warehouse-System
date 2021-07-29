@@ -1,0 +1,35 @@
+﻿@inject SahibDbContext db;
+
+@{
+    ViewData["Layout"] = "Admin";
+
+    Logo dynamic = db.Logos.Where(l => l.DeletedDate == null).OrderByDescending(l => l.Id).FirstOrDefault();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title | @ViewData["Layout"]</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="Assets/Sources/CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="libs/image-input/css/jquery.image-input.css" />
+    <script src="https://kit.fontawesome.com/3077fe3d43.js"></script>
+    @RenderSection("css", required: false)
+    <link rel="shortcut icon" href="uploads/logos/@dynamic.ImagePath" type="image/x-icon">
+</head>
+<body>
+
+    @RenderBody()
+
+    <script src="Assets/Sources/JS/jquery.min.js"></script>
+    <script src="libs/popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+    <script src="Assets/Sources/JS/bootstrap.bundle.min.js"></script>
+    <script src="libs/image-input/js/jquery.image-input.js"></script>
+    <script src="libs/jquery-validate/jquery.validate.min.js"></script>
+    <script src="libs/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
